@@ -1,9 +1,9 @@
 [submodule "bundle/mustache"]
 	path = bundle/mustache
-	url = git://github.com/juvenn/mustache.vim.git
+	url = https://github.com/juvenn/mustache.vim.git
 [submodule "bundle/tcomment"]
 	path = bundle/tcomment
-	url = git://github.com/tsaleh/vim-tcomment.git
+	url = https://github.com/tsaleh/vim-tcomment.git
 [submodule "bundle/zencoding"]
 	path = bundle/zencoding
 	url = https://github.com/mattn/zencoding-vim.git
