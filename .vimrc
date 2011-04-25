@@ -33,7 +33,8 @@ set cpoptions+=$ " Display a $ as vi does whenever you use the change command (c
 "Mappings
 let mapleader = ","
 nmap <F6> :b#<CR>
-:nnoremap <F5> :buffers<CR>:buffer<Space>
+nnoremap <F5> :buffers<CR>:buffer<Space>
+:noremap <Space> :set hlsearch! hlsearch?<CR>
 
 " Default sensible option that might be overridden for specific file type
 set noexpandtab "don't transform tab into spaces by default
