@@ -32,9 +32,9 @@ set cpoptions+=$ " Display a $ as vi does whenever you use the change command (c
 
 "Mappings
 let mapleader = ","
-nmap <F6> :b#<CR>
 nnoremap <F5> :buffers<CR>:buffer<Space>
 :noremap <Space> :set hlsearch! hlsearch?<CR>
+inoremap <c-space> <c-x><c-o>
 
 " Default sensible option that might be overridden for specific file type
 set noexpandtab "don't transform tab into spaces by default
@@ -44,6 +44,7 @@ set foldlevel=0
 
 
 " Nice to have
+set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 set titlestring=%f title
 set wildmenu
 set wildmode=longest,list  
@@ -60,3 +61,10 @@ ia retunr   return
 ia reutrn   return
 
 filetype plugin indent on
+if &term =~ "xterm\\|rxvt" 
+	let &t_SI = "\033]12;cyan3\x9c"
+	let &t_EI = "\033]12;grey\x9c"
+	:silent !echo -ne "\033]12;grey\x9c"
+	autocmd VimLeave * :!echo -ne "\033]12;grey\x9c"
+endif
+
