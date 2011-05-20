@@ -1,6 +1,6 @@
 " !! Use Pathogen to manage plugins !!
-call pathogen#helptags()
-call pathogen#runtime_append_all_bundles()
+silent! call pathogen#helptags()
+silent! call pathogen#runtime_append_all_bundles()
 
 " Common usual options that should never be changed.
 " Without these you don't survive Vim
@@ -60,7 +60,7 @@ ia funtion  function
 ia retunr   return
 ia reutrn   return
 
-filetype plugin indent on
+" filetype plugin indent on
 if &term =~ "xterm\\|rxvt" 
 	let &t_SI = "\033]12;cyan3\x9c"
 	let &t_EI = "\033]12;grey\x9c"
