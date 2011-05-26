@@ -1,6 +1,6 @@
 " !! Use Pathogen to manage plugins !!
-silent! call pathogen#helptags()
-silent! call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+call pathogen#runtime_append_all_bundles()
 
 " Common usual options that should never be changed.
 " Without these you don't survive Vim
@@ -29,11 +29,12 @@ set foldcolumn=1
 set wildignore+=*.pyc,*.jar,*.pdf,*.class,/tmp/*.*
 set directory=~/tmp
 set cpoptions+=$ " Display a $ as vi does whenever you use the change command (c)
-
+set viminfo='50,<100,s100,%
 "Mappings
+nmap <F1> <nop>
 let mapleader = ","
 nnoremap <F5> :buffers<CR>:buffer<Space>
-:noremap <Space> :set hlsearch! hlsearch?<CR>
+noremap <Space> :set hlsearch! hlsearch?<CR>
 inoremap <c-space> <c-x><c-o>
 
 " Default sensible option that might be overridden for specific file type
@@ -60,11 +61,11 @@ ia funtion  function
 ia retunr   return
 ia reutrn   return
 
-" filetype plugin indent on
-if &term =~ "xterm\\|rxvt" 
-	let &t_SI = "\033]12;cyan3\x9c"
-	let &t_EI = "\033]12;grey\x9c"
-	:silent !echo -ne "\033]12;grey\x9c"
-	autocmd VimLeave * :!echo -ne "\033]12;grey\x9c"
-endif
+filetype plugin indent on
+" if &term =~ "xterm\\\\|rxvt" 
+" 	let &t_SI = "\\033]12;cyan3\\x9c"
+" 	let &t_EI = "\\033]12;grey\\x9c"
+" 	:silent !echo -ne "\\033]12;grey\\x9c"
+" 	autocmd VimLeave * :!echo -ne "\\033]12;grey\\x9c"
+" endif
 
