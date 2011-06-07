@@ -6,6 +6,9 @@ set guioptions-=r
 set guioptions-=b
 highlight Cursor guifg=white guibg=grey
 highlight iCursor guifg=green guibg=#93D6A9
+set cursorline
+" hi CursorLine guibg=#6C6E70
+hi CursorLine guibg=#676968
 set guicursor=n-v-c:block-Cursor
 set guicursor+=i:ver25-iCursor/lCursor 
 set guicursor+=a:blinkon0

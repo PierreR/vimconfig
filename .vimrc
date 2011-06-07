@@ -33,6 +33,7 @@ set viminfo='50,<100,s100,%
 "Mappings
 nmap <F1> <nop>
 let mapleader = ","
+nnoremap Y y$
 nnoremap <F5> :buffers<CR>:buffer<Space>
 noremap <Space> :set hlsearch! hlsearch?<CR>
 inoremap <c-space> <c-x><c-o>
