@@ -4,7 +4,10 @@ call pathogen#runtime_append_all_bundles()
 
 " Common usual options that should never be changed.
 " Without these you don't survive Vim
+set lazyredraw
 set nocompatible
+set enc=utf-8
+set nostartofline
 colorscheme lucius
 set nobackup
 set noswapfile
@@ -26,12 +29,15 @@ set complete=.,w,b,t "completion will first search in the current buffer, then w
 set sessionoptions-=options
 set completeopt=menu,longest
 set foldcolumn=1
-set wildignore+=*.pyc,*.jar,*.pdf,*.class,/tmp/*.*
+set wildignore+=*.pyc,*.jar,*.pdf,*.class,/tmp/*.*,.git,*.o,*.obj,*.png,*.jpeg,*.gif,*.orig
 set directory=~/tmp
 set cpoptions+=$ " Display a $ as vi does whenever you use the change command (c)
 set viminfo='50,<100,s100,%
 "Mappings
 nmap <F1> <nop>
+nmap <T-F1> <nop>
+imap <F1> <nop>
+imap <T-F1> <nop>
 let mapleader = ","
 nnoremap Y y$
 nnoremap <F5> :buffers<CR>:buffer<Space>
@@ -43,6 +49,9 @@ set noexpandtab "don't transform tab into spaces by default
 set tabstop=4
 set shiftwidth=4
 set foldlevel=0
+
+" Command-t
+let g:CommandTMaxHeight=10
 
 
 " Nice to have
@@ -69,4 +78,13 @@ filetype plugin indent on
 " 	:silent !echo -ne "\\033]12;grey\\x9c"
 " 	autocmd VimLeave * :!echo -ne "\\033]12;grey\\x9c"
 " endif
+
+"
+" Persistent-undo (vim 7.3)
+" 
+set undofile
+set undodir=/tmp
+
+set grepprg=ack
+
 
