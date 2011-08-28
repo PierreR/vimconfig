@@ -43,6 +43,7 @@ nnoremap Y y$
 nnoremap <F5> :buffers<CR>:buffer<Space>
 noremap <Space> :set hlsearch! hlsearch?<CR>
 inoremap <c-space> <c-x><c-o>
+nnoremap <leader>l :execute ToggleColorScheme()<CR> 
 
 " Default sensible option that might be overridden for specific file type
 set noexpandtab "don't transform tab into spaces by default
@@ -55,7 +56,7 @@ let g:CommandTMaxHeight=10
 
 
 " Nice to have
-set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %{fugitive#statusline()}\ %P
 set titlestring=%f title
 set wildmenu
 set wildmode=longest,list  
@@ -86,5 +87,16 @@ set undofile
 set undodir=/tmp
 
 set grepprg=ack
+
+"Small custom fct
+function! ToggleColorScheme()
+	if g:colors_name == 'lucius'
+		set background=light
+		colorscheme solarized
+	elseif g:colors_name == 'solarized'
+		set background=dark
+		colorscheme lucius
+	endif
+endfunction
 
 
