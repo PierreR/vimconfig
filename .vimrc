@@ -8,7 +8,6 @@ set lazyredraw
 set nocompatible
 set enc=utf-8
 set nostartofline
-colorscheme lucius
 set nobackup
 set noswapfile
 set shell=zsh
@@ -42,7 +41,6 @@ let mapleader = ","
 nnoremap Y y$
 nnoremap <F5> :buffers<CR>:buffer<Space>
 noremap <Space> :set hlsearch! hlsearch?<CR>
-inoremap <c-space> <c-x><c-o>
 nnoremap <leader>l :execute ToggleColorScheme()<CR> 
 
 " Default sensible option that might be overridden for specific file type
@@ -88,15 +86,36 @@ set undodir=/tmp
 
 set grepprg=ack
 
+
 "Small custom fct
 function! ToggleColorScheme()
 	if g:colors_name == 'lucius'
-		set background=light
-		colorscheme solarized
+		setSolarized()
 	elseif g:colors_name == 'solarized'
-		set background=dark
-		colorscheme lucius
+		setLucius()
 	endif
 endfunction
 
+function! SetSolarized()
+	set background=light
+	colorscheme solarized
+	highlight iCursor guifg=black guibg=#5C7077
+endfunction	
 
+function! SetLucius()
+	set background=dark
+	colorscheme lucius
+	hi CursorLine guibg=#676968
+	highlight Cursor guifg=white guibg=grey
+	highlight iCursor guifg=green guibg=#93D6A9
+endfunction		
+
+let g:solarized_contrast="high"
+let g:solarized_visibility="high"
+exe SetSolarized()
+
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
+"Eclim
+let g:EclimXmlValidate=0
+let g:EclimHmlValidate=0
