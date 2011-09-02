@@ -22,13 +22,12 @@ set gdefault " assume the /g flag on :s substitutions to replace all matches in 
 set history=50 " how much line do you want to keep in the history table
 set bs=indent,eol,start
 set mouse=a " enable the mouse in all mode
-set splitbelow 
+" set splitbelow 
 set textwidth=0 " disable automatic line break !
 set complete=.,w,b,t "completion will first search in the current buffer, then windows, then open buffers, then tags
 set sessionoptions-=options
 set completeopt=menu,longest
-set foldcolumn=1
-set wildignore+=*.pyc,*.jar,*.pdf,*.class,/tmp/*.*,.git,*.o,*.obj,*.png,*.jpeg,*.gif,*.orig
+set wildignore+=*.pyc,*.jar,*.pdf,*.class,/tmp/*.*,.git,*.o,*.obj,*.png,*.jpeg,*.gif,*.orig,target/*
 set directory=~/tmp
 set cpoptions+=$ " Display a $ as vi does whenever you use the change command (c)
 set viminfo='50,<100,s100,%
@@ -47,7 +46,30 @@ nnoremap <leader>l :execute ToggleColorScheme()<CR>
 set noexpandtab "don't transform tab into spaces by default
 set tabstop=4
 set shiftwidth=4
-set foldlevel=0
+" Folding
+set foldcolumn=0 "Don't show because it does not take into account foldminlines
+set foldlevel=3 "unfold the first x level
+" set foldtext=v:folddashes.substitute(getline(v:foldstart),'/\\\\*\\\\\\|\\\\*/\\\\\\|{{{\\\\d\\\\=','','g')
+set foldtext=CustomFoldText() 
+fu! CustomFoldText()
+     "get first non-blank line
+     let fs = v:foldstart
+     while getline(fs) =~ '^\s*$' | let fs = nextnonblank(fs + 1)
+     endwhile
+     if fs > v:foldend
+         let line = getline(v:foldstart)
+     else
+         let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
+     endif
+ 
+     let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
+     let foldSize = 1 + v:foldend - v:foldstart
+     let foldSizeStr = " " . foldSize . " "
+     let foldLevelStr = repeat("+--", v:foldlevel)
+     let lineCount = line("$")
+     let expansionString = repeat(".", w - strwidth(foldSizeStr.line.foldLevelStr))
+     return line . expansionString . foldSizeStr . foldLevelStr
+ endf
 
 " Command-t
 let g:CommandTMaxHeight=10
@@ -90,9 +112,9 @@ set grepprg=ack
 "Small custom fct
 function! ToggleColorScheme()
 	if g:colors_name == 'lucius'
-		setSolarized()
+		SetSolarized()
 	elseif g:colors_name == 'solarized'
-		setLucius()
+		SetLucius()
 	endif
 endfunction
 
@@ -110,8 +132,6 @@ function! SetLucius()
 	highlight iCursor guifg=green guibg=#93D6A9
 endfunction		
 
-let g:solarized_contrast="high"
-let g:solarized_visibility="high"
 exe SetSolarized()
 
 autocmd BufReadPost fugitive://* set bufhidden=delete
@@ -119,3 +139,5 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 "Eclim
 let g:EclimXmlValidate=0
 let g:EclimHmlValidate=0
+
+let g:SuperTabDefaultCompletionType = "context"
