@@ -103,8 +103,10 @@ filetype plugin indent on
 "
 " Persistent-undo (vim 7.3)
 " 
-set undofile
-set undodir=/tmp
+if v:version >= 703
+	set undofile
+	set undodir=/tmp
+endif
 
 set grepprg=ack
 
@@ -112,9 +114,9 @@ set grepprg=ack
 "Small custom fct
 function! ToggleColorScheme()
 	if g:colors_name == 'lucius'
-		SetSolarized()
+		exe SetSolarized()
 	elseif g:colors_name == 'solarized'
-		SetLucius()
+		exe SetLucius()
 	endif
 endfunction
 
@@ -132,7 +134,13 @@ function! SetLucius()
 	highlight iCursor guifg=green guibg=#93D6A9
 endfunction		
 
-exe SetSolarized()
+let g:solarized_termcolors=256
+
+if has('gui_running')
+    exe SetSolarized()
+else
+	exe SetLucius()
+endif
 
 autocmd BufReadPost fugitive://* set bufhidden=delete
 

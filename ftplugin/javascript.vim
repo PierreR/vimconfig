@@ -5,6 +5,6 @@ setlocal softtabstop=4
 setlocal shiftwidth=4
 
 setlocal foldlevel=0
-setlocal foldmarker=function,} 
+setlocal foldmarker={,} 
 setlocal foldnestmax=2
 setlocal foldmethod=marker
