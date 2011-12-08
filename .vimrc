@@ -27,7 +27,7 @@ set textwidth=0 " disable automatic line break !
 set complete=.,w,b,t "completion will first search in the current buffer, then windows, then open buffers, then tags
 set sessionoptions-=options
 set completeopt=menu,longest
-set wildignore+=*.pyc,*.jar,*.pdf,*.class,/tmp/*.*,.git,*.o,*.obj,*.png,*.jpeg,*.gif,*.orig,target/*
+set wildignore+=*.pyc,*.jar,*.pdf,*.class,/tmp/*.*,.git,*.o,*.obj,*.png,*.jpeg,*.gif,*.orig,target/*,*.6,*.a,*.out
 set directory=~/tmp
 set cpoptions+=$ " Display a $ as vi does whenever you use the change command (c)
 set viminfo='50,<100,s100,%
@@ -40,9 +40,11 @@ let mapleader = ","
 nnoremap Y y$
 nnoremap <F5> :buffers<CR>:buffer<Space>
 noremap <Space> :set hlsearch! hlsearch?<CR>
+noremap <leader>n :cn<CR>
 nnoremap <leader>l :execute ToggleColorScheme()<CR> 
-
-" Default sensible option that might be overridden for specific file type
+nnoremap <leader>d :NERDTreeToggle<CR>
+nnoremap <leader>f :NERDTreeFind<CR>
+set nu
 set noexpandtab "don't transform tab into spaces by default
 set tabstop=4
 set shiftwidth=4
@@ -149,3 +151,4 @@ let g:EclimXmlValidate=0
 let g:EclimHmlValidate=0
 
 let g:SuperTabDefaultCompletionType = "context"
+
