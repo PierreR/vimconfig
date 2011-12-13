@@ -42,8 +42,8 @@ nnoremap <F5> :buffers<CR>:buffer<Space>
 noremap <Space> :set hlsearch! hlsearch?<CR>
 noremap <leader>n :cn<CR>
 nnoremap <leader>l :execute ToggleColorScheme()<CR> 
-nnoremap <leader>d :NERDTreeToggle<CR>
-nnoremap <leader>f :NERDTreeFind<CR>
+" nnoremap <leader>d :NERDTreeToggle<CR>
+" nnoremap <leader>f :NERDTreeFind<CR>
 set nu
 set noexpandtab "don't transform tab into spaces by default
 set tabstop=4
@@ -145,6 +145,7 @@ else
 endif
 
 autocmd BufReadPost fugitive://* set bufhidden=delete
+au BufWritePost *.go  silent make
 
 "Eclim
 let g:EclimXmlValidate=0
